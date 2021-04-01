@@ -1,0 +1,1213 @@
+{
+  "tags": [
+    {
+      "name": "Session",
+      "description": "Auth Sessions"
+    },
+    {
+      "name": "User",
+      "description": "User resources"
+    },
+    {
+      "name": "Notification",
+      "description": "User Notifications"
+    },
+    {
+      "name": "Device",
+      "description": "Device resources"
+    },
+    {
+      "name": "Scheme",
+      "description": "Device Schemes"
+    },
+    {
+      "name": "Schedule",
+      "description": "Device Schedules"
+    }
+  ],
+  "swagger": "2.0",
+  "securityDefinitions": {
+    "APIKeyQuery": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "query",
+      "description": "For GET API requests, authentication can be performed by passing the session token and id via query params (?session_id=1&token=EXAMPLE)"
+    },
+    "APIKeyBody": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "body",
+      "description": "For other API request methods, the session token and id may be passed as request body params in the json format:\n          {\n            \"session_id\": 1,\n            \"token\": \"EXAMPLE\"\n          }"
+    }
+  },
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/users/current": {
+      "put": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Update an user",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/User"
+            },
+            "description": "OK"
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "$ref": "#/definitions/User"
+            },
+            "required": true,
+            "name": "user",
+            "in": "body",
+            "description": "user attributes"
+          }
+        ],
+        "operationId": "KollerBackendWeb.UserController.update",
+        "description": ""
+      },
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Get User data",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/User"
+            },
+            "description": "OK"
+          }
+        },
+        "parameters": [],
+        "operationId": "KollerBackendWeb.UserController.show",
+        "description": ""
+      },
+      "delete": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Delete an user",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/User"
+            },
+            "description": "OK"
+          }
+        },
+        "parameters": [],
+        "operationId": "KollerBackendWeb.UserController.remove",
+        "description": ""
+      }
+    },
+    "/api/users": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Create a new user",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/User"
+            },
+            "description": "OK"
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "$ref": "#/definitions/User"
+            },
+            "required": true,
+            "name": "user",
+            "in": "body",
+            "description": "user attributes"
+          }
+        ],
+        "operationId": "KollerBackendWeb.UserController.create",
+        "description": ""
+      }
+    },
+    "/api/sessions/current": {
+      "delete": {
+        "tags": [
+          "Session"
+        ],
+        "summary": "Remove the current session for an user",
+        "responses": {
+          "200": {
+            "schema": {},
+            "description": "OK"
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "$ref": "#/definitions/Session"
+            },
+            "required": true,
+            "name": "session",
+            "in": "body",
+            "description": "The current session to be removed"
+          }
+        ],
+        "operationId": "KollerBackendWeb.SessionController.remove",
+        "description": ""
+      }
+    },
+    "/api/sessions/": {
+      "post": {
+        "tags": [
+          "Session"
+        ],
+        "summary": "Create a new auth session",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Session"
+            },
+            "description": "OK"
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "$ref": "#/definitions/EmailPassword"
+            },
+            "required": true,
+            "name": "session",
+            "in": "body",
+            "description": "session with email and password params within"
+          }
+        ],
+        "operationId": "KollerBackendWeb.SessionController.create",
+        "description": ""
+      }
+    },
+    "/api/schemes/{id}": {
+      "delete": {
+        "tags": [
+          "Scheme"
+        ],
+        "summary": "Delete a scheme",
+        "responses": {
+          "200": {
+            "schema": {},
+            "description": "OK"
+          }
+        },
+        "parameters": [
+          {
+            "type": "integer",
+            "required": true,
+            "name": "id",
+            "in": "path",
+            "description": "schedule id"
+          }
+        ],
+        "operationId": "KollerBackendWeb.SchemeController.remove",
+        "description": ""
+      }
+    },
+    "/api/schemes": {
+      "post": {
+        "tags": [
+          "Scheme"
+        ],
+        "summary": "Create a new scheme",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Scheme"
+            },
+            "description": "OK"
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "$ref": "#/definitions/Scheme"
+            },
+            "required": true,
+            "name": "scheme",
+            "in": "body",
+            "description": "scheme attributes"
+          }
+        ],
+        "operationId": "KollerBackendWeb.SchemeController.create",
+        "description": ""
+      },
+      "get": {
+        "tags": [
+          "Scheme"
+        ],
+        "summary": "Get a list of schemes attached to device",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/SchemesArray"
+            },
+            "description": "OK"
+          }
+        },
+        "parameters": [
+          {
+            "type": "string",
+            "required": true,
+            "name": "scheme_id",
+            "in": "query",
+            "description": "scheme id"
+          }
+        ],
+        "operationId": "KollerBackendWeb.SchemeController.index",
+        "description": ""
+      }
+    },
+    "/api/schedules/{id}": {
+      "delete": {
+        "tags": [
+          "Schedule"
+        ],
+        "summary": "Delete a schedule",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Schedule"
+            },
+            "description": "OK"
+          }
+        },
+        "parameters": [
+          {
+            "type": "integer",
+            "required": true,
+            "name": "id",
+            "in": "path",
+            "description": "schedule id"
+          }
+        ],
+        "operationId": "KollerBackendWeb.ScheduleController.remove",
+        "description": ""
+      }
+    },
+    "/api/schedules": {
+      "post": {
+        "tags": [
+          "Schedule"
+        ],
+        "summary": "Create a new schedule",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Schedule"
+            },
+            "description": "OK"
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "$ref": "#/definitions/Schedule"
+            },
+            "required": true,
+            "name": "schedule",
+            "in": "body",
+            "description": "schedule attributes"
+          }
+        ],
+        "operationId": "KollerBackendWeb.ScheduleController.create",
+        "description": ""
+      },
+      "get": {
+        "tags": [
+          "Schedule"
+        ],
+        "summary": "Get Schedules list attached to device",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Schedule"
+            },
+            "description": "OK"
+          }
+        },
+        "parameters": [
+          {
+            "type": "string",
+            "required": true,
+            "name": "device_id",
+            "in": "query",
+            "description": "device id"
+          },
+          {
+            "type": "string",
+            "required": true,
+            "name": "resource_type",
+            "in": "query",
+            "description": "resource type"
+          }
+        ],
+        "operationId": "KollerBackendWeb.ScheduleController.index",
+        "description": ""
+      }
+    },
+    "/api/notifications/{id}": {
+      "put": {
+        "tags": [
+          "Notification"
+        ],
+        "summary": "Update a new notification",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Notification"
+            },
+            "description": "OK"
+          }
+        },
+        "parameters": [
+          {
+            "type": "integer",
+            "required": true,
+            "name": "id",
+            "in": "path",
+            "description": "notification id"
+          },
+          {
+            "schema": {
+              "$ref": "#/definitions/Notification"
+            },
+            "required": true,
+            "name": "notification",
+            "in": "body",
+            "description": "notification attributes to update"
+          }
+        ],
+        "operationId": "KollerBackendWeb.NotificationController.update",
+        "description": ""
+      },
+      "delete": {
+        "tags": [
+          "Notification"
+        ],
+        "summary": "Delete a notification",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/User"
+            },
+            "description": "OK"
+          }
+        },
+        "parameters": [
+          {
+            "type": "integer",
+            "required": true,
+            "name": "id",
+            "in": "path",
+            "description": "notification id"
+          }
+        ],
+        "operationId": "KollerBackendWeb.NotificationController.remove",
+        "description": ""
+      }
+    },
+    "/api/notifications": {
+      "post": {
+        "tags": [
+          "Notification"
+        ],
+        "summary": "Create a new notification",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Notification"
+            },
+            "description": "OK"
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "$ref": "#/definitions/Notification"
+            },
+            "required": true,
+            "name": "notification",
+            "in": "body",
+            "description": "notification attributes"
+          }
+        ],
+        "operationId": "KollerBackendWeb.NotificationController.create",
+        "description": ""
+      }
+    },
+    "/api/devices/{id}": {
+      "put": {
+        "tags": [
+          "Device"
+        ],
+        "summary": "Update a device",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Device"
+            },
+            "description": "OK"
+          }
+        },
+        "parameters": [
+          {
+            "type": "integer",
+            "required": true,
+            "name": "id",
+            "in": "path",
+            "description": "device id"
+          },
+          {
+            "schema": {
+              "$ref": "#/definitions/Device"
+            },
+            "required": true,
+            "name": "device",
+            "in": "body",
+            "description": "device attributes to update"
+          }
+        ],
+        "operationId": "KollerBackendWeb.DeviceController.update",
+        "description": ""
+      },
+      "delete": {
+        "tags": [
+          "Device"
+        ],
+        "summary": "Resetting a device (Deletes associated sessions/routines/and user association)",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Device"
+            },
+            "description": "OK"
+          }
+        },
+        "parameters": [
+          {
+            "type": "integer",
+            "required": true,
+            "name": "id",
+            "in": "path",
+            "description": "device id"
+          }
+        ],
+        "operationId": "KollerBackendWeb.DeviceController.remove",
+        "description": ""
+      }
+    },
+    "/api/devices/{device_id}/color": {
+      "post": {
+        "tags": [
+          "Device"
+        ],
+        "summary": "Calibrate device (set MAC Address, and temperature offset)",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Device"
+            },
+            "description": "OK"
+          }
+        },
+        "parameters": [
+          {
+            "type": "integer",
+            "required": true,
+            "name": "device_id",
+            "in": "path",
+            "description": "device id"
+          },
+          {
+            "schema": {
+              "$ref": "#/definitions/Color"
+            },
+            "required": true,
+            "name": "color",
+            "in": "body",
+            "description": "New device color"
+          }
+        ],
+        "operationId": "KollerBackendWeb.DeviceColorController.update",
+        "description": ""
+      }
+    },
+    "/api/devices/toggle_status": {
+      "post": {
+        "tags": [
+          "Device"
+        ],
+        "summary": "Change the status of the device (master toggle switch button value)",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Device"
+            },
+            "description": "OK"
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "$ref": "#/definitions/DeviceStatus"
+            },
+            "required": true,
+            "name": "params",
+            "in": "body",
+            "description": "Device and new status"
+          }
+        ],
+        "operationId": "KollerBackendWeb.DeviceController.toggle_status",
+        "description": ""
+      }
+    },
+    "/api/devices/calibrate": {
+      "post": {
+        "tags": [
+          "Device"
+        ],
+        "summary": "Calibrate device (set Mac Address, and temperature offset)",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Device"
+            },
+            "description": "OK"
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "$ref": "#/definitions/DeviceCalibration"
+            },
+            "required": true,
+            "name": "device",
+            "in": "body",
+            "description": "Device calibration attributes"
+          }
+        ],
+        "operationId": "KollerBackendWeb.DeviceController.calibrate",
+        "description": ""
+      }
+    },
+    "/api/devices": {
+      "get": {
+        "tags": [
+          "Device"
+        ],
+        "summary": "Find a device by mac_address or id",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Device"
+            },
+            "description": "OK"
+          }
+        },
+        "parameters": [
+          {
+            "schema": {
+              "$ref": "#/definitions/DeviceQuery"
+            },
+            "required": true,
+            "name": "device",
+            "in": "body",
+            "description": "Device query params"
+          }
+        ],
+        "operationId": "KollerBackendWeb.DeviceController.show",
+        "description": ""
+      }
+    },
+    "/api/device_tokens": {
+      "post": {
+        "tags": [
+          "Device"
+        ],
+        "summary": "Provides a token in order to facilitate a device connecting to the server via websockets (will be remain valid for two weeks)",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/DeviceToken"
+            },
+            "description": "OK"
+          }
+        },
+        "parameters": [],
+        "operationId": "KollerBackendWeb.DeviceTokenController.create",
+        "description": ""
+      }
+    }
+  },
+  "info": {
+    "version": "1.0",
+    "title": "Koller API",
+    "termsOfService": "Open for koller App Users",
+    "description": "API Documentation for Koller v1"
+  },
+  "definitions": {
+    "User": {
+      "type": "object",
+      "title": "User",
+      "required": [
+        "product_number",
+        "password_confirmation",
+        "password",
+        "email",
+        "country",
+        "name"
+      ],
+      "properties": {
+        "state": {
+          "type": "string",
+          "description": "User State"
+        },
+        "retailer": {
+          "type": "string",
+          "description": "Retailer"
+        },
+        "product_number": {
+          "type": "string",
+          "description": "Product Number"
+        },
+        "platform": {
+          "type": "string",
+          "description": "iOS/Android"
+        },
+        "password_confirmation": {
+          "type": "string",
+          "description": "User Password Confirmation"
+        },
+        "password": {
+          "type": "string",
+          "description": "User Password"
+        },
+        "notification_token": {
+          "type": "string",
+          "description": "Android/iOS notifications token"
+        },
+        "name": {
+          "type": "string",
+          "description": "User Name"
+        },
+        "id": {
+          "type": "string",
+          "description": "User Name"
+        },
+        "email": {
+          "type": "string",
+          "description": "User Email"
+        },
+        "do_notification": {
+          "type": "boolean",
+          "description": "Will receive notifications"
+        },
+        "country": {
+          "type": "string",
+          "description": "User Country"
+        }
+      },
+      "example": {
+        "state": "Washington",
+        "retailer": "Amazon",
+        "platform": "ios",
+        "password_confirmation": "myPass1234",
+        "password": "myPass1234",
+        "name": "Joe",
+        "id": "UUID",
+        "email": "test@koller.com",
+        "do_notification": false,
+        "country": "United States"
+      },
+      "description": "A user of the application"
+    },
+    "Session": {
+      "type": "object",
+      "title": "Session",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "token": {
+          "type": "string",
+          "description": "Session Token"
+        },
+        "id": {
+          "type": "number",
+          "description": "Session Id"
+        }
+      },
+      "example": {
+        "token": "UUID",
+        "id": 1
+      },
+      "description": "Auth Session for a user"
+    },
+    "SchemesArray": {
+      "type": "array",
+      "title": "Schemes Array",
+      "items": {
+        "$ref": "#/definitions/SchemesArray"
+      },
+      "example": [
+        {
+          "name": "purple",
+          "id": 1,
+          "color": {
+            "r": 57,
+            "g": 41,
+            "b": 255
+          }
+        },
+        {
+          "name": "Green",
+          "id": 2,
+          "color": {
+            "r": 57,
+            "g": 255,
+            "b": 1
+          }
+        }
+      ],
+      "description": "List of schemes"
+    },
+    "Scheme": {
+      "type": "object",
+      "title": "Scheme",
+      "required": [
+        "color",
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Scheme Name"
+        },
+        "color": {
+          "type": "string",
+          "description": "Scheme Color"
+        }
+      },
+      "example": {
+        "name": "purple",
+        "id": 1,
+        "color": {
+          "r": 57,
+          "g": 41,
+          "b": 255
+        }
+      },
+      "description": "A set of color and name associated to device or schedule"
+    },
+    "Schedule": {
+      "type": "object",
+      "title": "Schedule",
+      "required": [
+        "end_at",
+        "start_at",
+        "resource_type",
+        "device_id",
+        "resource_id",
+        "name"
+      ],
+      "properties": {
+        "wednesday": {
+          "type": "boolean",
+          "description": "Should activate on wednesdays?",
+          "default": false
+        },
+        "tuesday": {
+          "type": "boolean",
+          "description": "Should activate on tuesdays?",
+          "default": false
+        },
+        "sunday": {
+          "type": "boolean",
+          "description": "Should activate on sundays?",
+          "default": false
+        },
+        "start_at": {
+          "type": "integer",
+          "description": "The minute in UTC 0 where the schedule will turn on"
+        },
+        "saturday": {
+          "type": "boolean",
+          "description": "Should activate on saturdays?",
+          "default": false
+        },
+        "resource_type": {
+          "type": "string",
+          "description": "The entity table to associate (device...)"
+        },
+        "resource_id": {
+          "type": "string",
+          "description": "The association Id entity"
+        },
+        "offset": {
+          "type": "integer",
+          "description": "The time zone offste",
+          "default": 0
+        },
+        "name": {
+          "type": "string",
+          "description": "Schedule Name"
+        },
+        "monday": {
+          "type": "boolean",
+          "description": "Should activate on mondays?",
+          "default": false
+        },
+        "id": {
+          "type": "string",
+          "description": "Schedule Name"
+        },
+        "friday": {
+          "type": "boolean",
+          "description": "Should activate on fridays?",
+          "default": false
+        },
+        "end_at": {
+          "type": "integer",
+          "description": "The minute in UTC 0 where the schedule will turn ooffn"
+        },
+        "device_id": {
+          "type": "integer",
+          "description": "The device Id"
+        },
+        "active": {
+          "type": "boolean",
+          "description": "The status of the schedule",
+          "default": false
+        }
+      },
+      "example": {
+        "wednesday": true,
+        "tuesday": false,
+        "thursday": false,
+        "sunday": true,
+        "start_at": 780,
+        "saturday": false,
+        "resource_type": "schemes",
+        "resource_id": 1,
+        "offset": -5,
+        "name": "White lights",
+        "monday": false,
+        "id": 1,
+        "friday": false,
+        "end_at": 900,
+        "device_id": 1,
+        "active": true
+      },
+      "description": "A schedule attached to device"
+    },
+    "Notification": {
+      "type": "object",
+      "title": "Notification",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "wednesday": {
+          "type": "boolean",
+          "description": "Should be notified on wednesdays?",
+          "default": false
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "change_water",
+            "test_water",
+            "medicate_tank",
+            "feeding_schedule",
+            "filter_cartridge",
+            "filter_supplies"
+          ],
+          "description": "Type of notification"
+        },
+        "tuesday": {
+          "type": "boolean",
+          "description": "Should be notified on tuesdays?",
+          "default": false
+        },
+        "sunday": {
+          "type": "boolean",
+          "description": "Should be notified on sundays?",
+          "default": false
+        },
+        "saturday": {
+          "type": "boolean",
+          "description": "Should be notified on saturdays?",
+          "default": false
+        },
+        "on": {
+          "type": "boolean",
+          "description": "Is active?",
+          "default": false
+        },
+        "month_day": {
+          "type": "number",
+          "description": "The day of the month to be notified"
+        },
+        "monday": {
+          "type": "boolean",
+          "description": "Should be notified on mondays?",
+          "default": false
+        },
+        "mminute": {
+          "type": "number",
+          "description": "The minute of the day to be notified",
+          "default": 0
+        },
+        "friday": {
+          "type": "boolean",
+          "description": "Should be notified on fridays?",
+          "default": false
+        }
+      },
+      "example": {
+        "wednesday": false,
+        "user_id": "UUID",
+        "type": "change_water",
+        "tuesday": false,
+        "thursday": false,
+        "sunday": false,
+        "saturday": false,
+        "on": false,
+        "month_day": 21,
+        "monday": false,
+        "minute": 0,
+        "id": 1,
+        "friday": false
+      },
+      "description": "A notification configured by the user"
+    },
+    "EmailPassword": {
+      "type": "object",
+      "title": "Email && Password",
+      "required": [
+        "password"
+      ],
+      "properties": {
+        "password": {
+          "type": "string",
+          "description": "User password"
+        },
+        "email": {
+          "type": "string",
+          "description": "User email"
+        }
+      },
+      "example": {
+        "token": "1234",
+        "email": "test@test.com"
+      },
+      "description": "User email and password"
+    },
+    "DeviceToken": {
+      "type": "object",
+      "title": "Device Token",
+      "properties": {
+        "device_token": {
+          "type": "string",
+          "description": "Device Token"
+        }
+      },
+      "example": {
+        "device_token": "EXAMPLE"
+      },
+      "description": "Token to connect device with server"
+    },
+    "DeviceStatus": {
+      "type": "object",
+      "title": "Device && Status",
+      "required": [
+        "status",
+        "device"
+      ],
+      "properties": {
+        "status": {
+          "type": "boolean",
+          "description": "New device status"
+        },
+        "device": {
+          "description": "Device attributes",
+          "$ref": "#/definitions/Device"
+        }
+      },
+      "example": {
+        "status": true,
+        "device": {
+          "user_id": 1,
+          "upper_limit_alert": 90,
+          "synced_at": "2021-03-29 12:03:47",
+          "routines": [],
+          "name": "Test Device",
+          "mac_address": "DEVICE_MAC_ADDRESS",
+          "lower_limit_alert": 70,
+          "id": 1,
+          "current_temp": 123,
+          "connected": false,
+          "calibration_offset": 8.0
+        }
+      },
+      "description": "Device attributes and new status"
+    },
+    "DeviceQuery": {
+      "type": "object",
+      "title": "DeviceQuery",
+      "properties": {
+        "mac_address": {
+          "type": "string",
+          "description": "Mac Address of the device"
+        },
+        "id": {
+          "type": "string",
+          "description": "Device id"
+        }
+      },
+      "example": {
+        "mac_address": "DEVICE_MAC_ADDRESS",
+        "id": 1
+      },
+      "description": "Device fields required to find a device (mac_address, device_id)"
+    },
+    "DeviceCalibration": {
+      "type": "object",
+      "title": "Device Calibration",
+      "required": [
+        "calibration_offset",
+        "mac_address"
+      ],
+      "properties": {
+        "mac_address": {
+          "type": "string",
+          "description": "User Name"
+        },
+        "calibration_offset": {
+          "type": "number",
+          "description": "User Name"
+        }
+      },
+      "example": {
+        "mac_address": "DEVICE_MAC_ADDRESS",
+        "calibration_offset": 8
+      },
+      "description": "Device calibration info, used to initialize the device"
+    },
+    "Device": {
+      "type": "object",
+      "title": "Device",
+      "required": [
+        "calibration_offset",
+        "mac_address"
+      ],
+      "properties": {
+        "user_id": {
+          "type": "string",
+          "description": "The user id"
+        },
+        "upper_limit_alert": {
+          "type": "string",
+          "description": "Max temperature alert (degrees fahrenheit)"
+        },
+        "synced_at": {
+          "type": "string",
+          "format": "datetime",
+          "description": "The last syncronization date"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the device"
+        },
+        "mac_address": {
+          "type": "string",
+          "description": "Mac Address of the device"
+        },
+        "lower_limit_alert": {
+          "type": "string",
+          "description": "Lower temperature alert (degrees fahrenheit)"
+        },
+        "id": {
+          "type": "string",
+          "description": "Device id"
+        },
+        "current_temp": {
+          "type": "integer",
+          "description": "Current temperature (degrees fahrenheit)"
+        },
+        "connected": {
+          "type": "boolean",
+          "description": "is connected?"
+        },
+        "calibration_offset": {
+          "type": "number",
+          "description": "The temperature offset (degrees fahrenheit)"
+        }
+      },
+      "example": {
+        "user_id": 1,
+        "upper_limit_alert": 90,
+        "synced_at": "2021-03-29 12:03:47",
+        "routines": [],
+        "name": "Test Device",
+        "mac_address": "DEVICE_MAC_ADDRESS",
+        "lower_limit_alert": 70,
+        "id": 1,
+        "current_temp": 123,
+        "connected": false,
+        "calibration_offset": 8.0
+      },
+      "description": "Device Information"
+    },
+    "Color": {
+      "type": "object",
+      "title": "Color",
+      "properties": {
+        "r": {
+          "type": "integer",
+          "description": "Red"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name"
+        },
+        "g": {
+          "type": "integer",
+          "description": "Green"
+        },
+        "b": {
+          "type": "integer",
+          "description": "Blue"
+        }
+      },
+      "example": {
+        "r": 220,
+        "name": "Cyan",
+        "g": 85,
+        "b": 242
+      },
+      "description": "Device Color Schema (RGB)"
+    }
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "basePath": "/api"
+}
